@@ -180,7 +180,7 @@
                                     Upload Images <span class="red">*</span>
                                 </label>
                                 <div class="col-md-6 col-sm-6 col-xs-12">
-                                    <asp:FileUpload ID="FileUpload1" name="files[]" AllowMultiple="true" maxlength="3" multiple runat="server" />
+                                    <asp:FileUpload ID="FileUpload1" onchange="return ChekFiles();" name="files[]" maxlength="2" runat="server" />
 
                                 </div>
                             </div>
@@ -362,7 +362,7 @@
     <!-- pace -->
     <script src="../../assets/js/pace/pace.min.js"></script>
     <script type="text/javascript">
-      
+        var numFiles="";
         function isNumberKey(evt) {
             var charCode = (evt.which) ? evt.which : event.keyCode
             if (charCode != 46 && charCode > 31
@@ -543,6 +543,17 @@
                 notify('Alert','Please enter contact email','error');
                 return false;
             }
+            numFiles = $("input:file").length;
+         
+            if (numFiles>4)
+            {
+                
+                
+                    notify('Alert','Unable to upload more than 3 files, please remove file(s)' ,'error');
+                    return false;
+             
+            }
+            
             return ValidateRegForm();
            
          
@@ -633,6 +644,17 @@
             });
 
         });
+      
+        function  ChekFiles()
+        {
+            //numFiles = $("input:file").length;
+            //if(numFiles>"3")
+            //{
+            //    notify('alert','Unable to upload more tahn 3 images','alert');
+               
+            //}
+          
+        }
 
     </script>
 
